@@ -12,7 +12,7 @@ import Foundation
 
 
 struct WeatherStruct: Decodable, Encodable {
-    var now       : Int
+    var now       : Int             //current Time in unixtime format
     var fact      : FactStruct
     var forecasts : [ForecastStruct]
 }
@@ -28,11 +28,11 @@ struct ForecastStruct: Decodable, Encodable {
     var date    : String
     var sunrise : String
     var sunset  : String
-    var parts   : PartsEnum         //прогноз погоды по частям (утро / день 12ч / вечер / ночь 12ч)
-    var hours   : [HoursStruct]     //прогноз погоды по часам (24 части на сутки)
+    var parts   : PartsOfDay        //weather forecast in parts (morning / day / evening / night)
+    var hours   : [HoursStruct]     //hourly weather forecast (24 parts per day)
 }
 
-struct PartsEnum: Decodable, Encodable {       //часть дня
+struct PartsOfDay: Decodable, Encodable {
     var evening     : PartsStruct
     var morning     : PartsStruct
     var night       : PartsStruct
@@ -40,17 +40,17 @@ struct PartsEnum: Decodable, Encodable {       //часть дня
 }
 
 struct PartsStruct: Decodable, Encodable {
-    var temp_min   : Int            //минимальная температура
-    var temp_avg   : Int            //средняя температура
-    var temp_max   : Int            //максимальная температура
-    var feels_like : Int            //ощущается как
-    var prec_type  : Int            //тип осадков
-    var condition  : String         //описание погоды
-    var icon       : String         //картинка соответствующая описанию погоды
+    var temp_min   : Int            //minimum temperature
+    var temp_avg   : Int            //average temperature
+    var temp_max   : Int            //maximum temperature
+    var feels_like : Int            //feels like
+    var prec_type  : Int            //precipitation type
+    var condition  : String         //weather description
+    var icon       : String         //picture corresponding to the description of the weather
 }
 
 struct HoursStruct: Decodable, Encodable {
-    var hour       : String?        //порядковый номер часа (0-23)
+    var hour       : String?        //serial number of the hour (0-23)
     var temp       : Int?
     var feels_like : Int?
     var icon       : String?
